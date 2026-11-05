@@ -1,0 +1,19 @@
+<?php
+/** PSR-4 autoloader for Clikgate\WP\ (no Composer at run time). */
+
+declare(strict_types=1);
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+spl_autoload_register(static function (string $class): void {
+    $prefix = 'Clikgate\\WP\\';
+    if (strncmp($class, $prefix, strlen($prefix)) !== 0) {
+        return;
+    }
+    $path = __DIR__ . '/' . str_replace('\\', '/', substr($class, strlen($prefix))) . '.php';
+    if (is_file($path)) {
+        require_once $path;
+    }
+});

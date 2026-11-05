@@ -1,0 +1,52 @@
+# A throwaway WordPress + WooCommerce shop for the App banners browser test. Nothing here is a real secret.
+# Start: docker compose up -d && docker compose run --rm wpcli sh /seed/seed.sh
+services:
+  db:
+    image: mariadb:11.4.3
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: e2e-only-password
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    tmpfs:
+      - /var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.7.1-php8.2-apache
+    depends_on: [db]
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: e2e-only-password
+      WORDPRESS_DB_NAME: wordpress
+      # The plugin and the loader talk to the Clikgate API under test (test mode), not to api.clikgate.com
+      WORDPRESS_CONFIG_EXTRA: |
+        define('CLIKGATE_API_BASE', getenv('CLIKGATE_API_URL'));
+        define('CLIKGATE_SCRIPT_URL', getenv('CLIKGATE_API_URL') . '/v1/static/clikgate.js');
+        define('CLIKGATE_APP_BANNERS_URL', getenv('CLIKGATE_API_URL') . '/v1/static/app-banners.js');
+      CLIKGATE_API_URL: ${CLIKGATE_API_URL:?set CLIKGATE_API_URL to the Clikgate API under test}
+    volumes:
+      - wp:/var/www/html
+      # The plugin from this repository, read-only
+      - ../..:/var/www/html/wp-content/plugins/clikgate:ro
+
+  wpcli:
+    image: wordpress:cli-2.11.0-php8.2
+    depends_on: [wordpress]
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: e2e-only-password
+      WORDPRESS_DB_NAME: wordpress
+      WP_BASE_URL: ${WP_BASE_URL:?set WP_BASE_URL to the address the browser uses}
+    volumes:
+      - wp:/var/www/html
+      - ../..:/var/www/html/wp-content/plugins/clikgate:ro
+      - ./seed:/seed:ro
+    profiles: [tools]
+
+volumes:
+  wp:

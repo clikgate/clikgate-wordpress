@@ -1,0 +1,25 @@
+# Runs in the public mirror clikgate/clikgate-wordpress only (this folder becomes that repository's root).
+# The plugin is developed in Clikgate's main repository, so pull requests here are closed with a note.
+name: Close pull requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  close:
+    if: github.repository == 'clikgate/clikgate-wordpress'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      # No checkout: the pull request's code is never run
+      - name: Comment and close
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh pr close "$PR" --repo "$REPO" --comment "Thanks! This repository is a read-only copy: Clikgate for WordPress is developed in Clikgate's main repository. Please open an issue here instead, and we'll pick it up. Pull requests are closed automatically."

@@ -1,0 +1,8 @@
+.clikgate .clikgate-code { font-size: 1.6em; letter-spacing: 0.12em; padding: 4px 10px; }
+.clikgate .clikgate-device { padding: 8px 12px; border-left: 4px solid #2271b1; background: #fff; max-width: 40em; }
+.clikgate .clikgate-status-line { min-height: 1.5em; }
+.clikgate .clikgate-badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-weight: 600; }
+.clikgate .clikgate-badge-live { background: #d7f0dd; color: #0a5c22; }
+.clikgate .clikgate-badge-test { background: #fcf0d4; color: #6b4a00; }
+.clikgate .clikgate-goals td { vertical-align: top; }
+.clikgate .clikgate-goals textarea { width: 100%; }

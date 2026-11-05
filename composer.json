@@ -1,0 +1,27 @@
+{
+    "name": "clikgate/clikgate-wordpress",
+    "description": "Clikgate for WordPress (WordPress.org slug: clikgate). Development dependencies only; the plugin has no run-time dependencies.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Clikgate\\WP\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-version": "php scripts/check-version.php"
+    }
+}
