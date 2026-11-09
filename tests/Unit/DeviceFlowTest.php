@@ -38,7 +38,7 @@ final class DeviceFlowTest extends TestCase
         $this->assertSame('POST', $request['method']);
         $this->assertArrayNotHasKey('Authorization', $request['headers']);
         $this->assertSame('wordpress_plugin', $request['body']['client_type']);
-        $this->assertSame('1.0.0', $request['body']['client_info']['plugin_version']);
+        $this->assertSame(CLIKGATE_VERSION, $request['body']['client_info']['plugin_version']);
         $this->assertSame('https://shop.example/', $request['body']['client_info']['site_url']);
         $this->assertTrue($request['body']['client_info']['woocommerce']);
         $this->assertTrue($result['ok']);
