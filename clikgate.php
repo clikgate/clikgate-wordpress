@@ -3,7 +3,7 @@
  * Plugin Name:       Clikgate
  * Plugin URI:        https://clikgate.com/docs/wordpress
  * Description:       Connects your site to Clikgate without copying keys: adds the Clikgate web script and confirms payments from WooCommerce and supported payment-form plugins, matched to the click that brought the customer.
- * Version:           1.0.0
+ * Version:           2.0.0
  * Requires at least: 6.6
  * Requires PHP:      8.2
  * Author:            Clikgate
@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CLIKGATE_VERSION', '1.0.0');
+define('CLIKGATE_VERSION', '2.0.0');
 define('CLIKGATE_FILE', __FILE__);
 define('CLIKGATE_DIR', __DIR__);
 

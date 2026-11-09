@@ -4,7 +4,7 @@ Tags: attribution, payments, woocommerce, analytics, conversions
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.2
-Stable tag: 1.0.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,9 @@ Safari, and every browser on iPhone, keeps a click ID saved by a script for up t
 Turn on "Show my App banners on this site" under Settings › Clikgate. Clikgate asks an Owner or Admin to approve it in the dashboard (with a security code), and your site must be verified in Clikgate first. Banners are designed in the Clikgate dashboard. On product pages the banner passes the product to your app; if your app can't open the page, it opens your app's home screen. Turning the setting off removes the banners from your site and keeps your settings in Clikgate.
 
 == Changelog ==
+
+= 2.0.0 =
+* Matches the Clikgate 2.0 SDKs, where track() was removed in favour of goal(). The plugin has always sent goal(), so your settings and goal mapping keep working.
 
 = 1.0.0 =
 * First release of Clikgate for WordPress: device sign-in, automatic web script, Payment goal confirmations from WooCommerce and supported payment-form plugins, goal mapping, "Send a test" and a status panel.
